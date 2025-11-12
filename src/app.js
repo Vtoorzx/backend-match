@@ -28,7 +28,15 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.options('/*', cors(corsOptions));
+app.use((req, res, next) =>{
+    if (req.method == 'OPTIONS'){
+        cors(corsOptions)(req, res, () => {
+            res.sendStatus(200);
+        });
+    } else{
+        next();
+    }
+})
 
 
 app.use(express.json());
