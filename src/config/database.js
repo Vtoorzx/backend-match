@@ -2,12 +2,13 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-   
+    // 👇 Linha adicionada para mostrar o valor real da variável no Render
+    console.log('🔍 Valor real do MONGO_URI:', JSON.stringify(process.env.MONGO_URI));
+
     if (!process.env.MONGO_URI) {
       throw new Error('A variável de ambiente MONGO_URI não está configurada.');
     }
 
-    
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
